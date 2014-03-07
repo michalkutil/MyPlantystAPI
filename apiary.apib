@@ -1,0 +1,86 @@
+FORMAT: 1A
+HOST: http://my.plantyst.com/Api
+
+# MyPlantyst API
+
+# Group User Messages
+
+## User Messages Collection [/UserMessages/{userId}]
+
++ Model (application/json)
+    + Body
+
+            {
+                "_embedded": {
+                    "messages": [
+                        {
+                            "_links" : {
+                                "self": { "href": "/Api/UserMessage/10/2520111168377037307" }
+                            },
+                            "userId": "10",
+                            "id": "2520111168377037307",
+                            "Text": "Message text 2"
+                        },
+                        {
+                            "_links" : {
+                                "self": { "href": "/Api/UserMessage/10/2520322875831626680" }
+                            },
+                            "userId": "10",
+                            "id": "2520322875831626680",
+                            "Text": "Message text 1",
+                            "ReadTime": "2012-03-07T23:00:00"
+                        }
+                    ]
+                }
+            }
+
+### List Messages [GET]
+
+Returns last `n` user messages. Number `n` is a server constant set to 20 at this moment.
+
++ Response 200
+
+    [User Messages Collection][]
+
+## User Message [/UserMessages/{userId}/{id}]
+A single User Message with all its details.
+
++ Parameters
+    + userId (required, integer, `1`) ... The `userId` of the user.
+    + id (required, string, `2520111168377037307`) ... String uniqueue user message `id` to perform action with.
+
++ Model
+    + Body
+
+            {
+                "_links" : {
+                    "self": { "href": "/Api/UserMessage/10/2520322875831626680" }
+                },
+                "userId": "10",
+                "id": "2520322875831626680",
+                "text": "Message text 1",
+                "readTime": "2012-03-07T22:01:00"
+            }
+
+### Edit a User Message [PATCH]
+To update a User Message send a JSON *model* with updated value for one or more of the User Message resource properties.
+
+*Note*: Only `ReadTime` property is allowed to be modified, other properties are ignored, at this moment.
+
+*Note2*: The updated value for `ReadTime` property is overwrite by the server actual time value.
+
+#### Description of server responses
+
+- `400 Bad Request` \- The request could not be understood or was missing required information.
+
++ Request (application/json)
+
+        {
+            "ReadTime": "2012-03-07T22:00:00"
+        }
+
++ Response 200
+
+    [User Message][]
+
++ Response 400
