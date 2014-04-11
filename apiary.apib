@@ -84,3 +84,56 @@ To update a User Message send a JSON *model* with updated value for one or more 
     [User Message][]
 
 + Response 400
+
+# Group Variable Time Data
+
+## Utilization Cumulative Collection [/UtilizationCumulative/{?variableId,from,to}]
+
++ Model (application/json)
+    + Body
+
+            [
+                {
+                    "Uptime":0,
+                    "Setup":9,
+                    "Stop":1431,
+                    "NoData":0,
+                    "Other":0,
+                    "RowKey":"20140215",
+                    "Timestamp":"2014-02-15T23:02:39.6195401+00:00",
+                },
+                {
+                    "Uptime":85,
+                    "Setup":38,
+                    "Stop":1317,
+                    "NoData":0,
+                    "Other":0,
+                    "RowKey":"20140216",
+                    "Timestamp":"2014-02-16T23:02:44.501825+00:00",
+                },
+                {
+                    "Uptime":838,
+                    "Setup":218,
+                    "Stop":384,
+                    "NoData":0,
+                    "Other":0,
+                    "RowKey":"20140217",
+                    "Timestamp":"2014-02-17T23:03:02.1430764+00:00",
+                }
+            ]
+
+
+### List Utilization Cumulative [GET]
+
+Returns day cumulative utilization for specified day interval given by the `from` (include) to the `to` (include) params.
+
++ Parameters
+
+    + variableId (integer, required, `11`) ... The `variableId` of the variable.
+    + from (string, required, `2014-02-15`) ... Requested start day in format: `YYYY-MM-DD`.
+    + to (string, required, `2014-02-17`) ... Requested finish day in format: `YYYY-MM-DD`.
+
++ Response 200
+
+    [Utilization Cumulative Collection][]
+
