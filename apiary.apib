@@ -137,3 +137,94 @@ Returns day cumulative utilization for specified day interval given by the `from
 
     [Utilization Cumulative Collection][]
 
+# Group Multiple Measurement Data
+
+## Multiple Measurement Utilization Data Collection [/MeasurementData]
+
++ Model (application/json)
+    + Body
+
+            {
+                "results": [
+                    {
+                        "query": {
+                            "measurementId": 2,
+                            "from": "2011-11-30T23:00:00",
+                            "to": "2011-12-01T07:00:00",
+                            "view": "baseHour"
+                        },
+                        "data": [
+                            {
+                                "itemCount": 1,
+                                "timeSquareSum": 100,
+                                "timeSum": 10,
+                                "timeValueSum": 50,
+                                "valueSum": 5
+                            },
+                            {
+                                "itemCount": 0
+                            }
+                        ]
+                    },
+                    {
+                        "query": {
+                            "measurementId": 14,
+                            "view": "baseHour",
+                            "from": "2012-12-20T12:34:56",
+                            "to": "2013-01-01T01:02"
+                        },
+                        "data": [
+                            {
+                                "itemCount": 0
+                            },
+                            {
+                                "itemCount": 1,
+                                "timeSquareSum": 100,
+                                "timeSum": 10,
+                                "timeValueSum": 50.0,
+                                "valueSum": 5.0
+                            },
+                            {
+                                "itemCount": 3,
+                                "timeSquareSum": 100,
+                                "timeSum": 10,
+                                "timeValueSum": 66.0,
+                                "valueSum": 6.6
+                            },
+                            {
+                                "itemCount": 0
+                            }
+                        ]
+                    }
+                ]
+            }
+
+
+### Multiple Measurements Cumulative Utilization Data [POST]
+
+Returns day cumulative utilization for specified day interval given by the `from` (include) to the `to` (include) params.
+
++ Request
+
+        {
+            "Queries": [
+                {
+                    "MeasurementId": 2,
+                    "View": "baseHour",
+                    "From": "2011-11-30T23:00",
+                    "To": "2011-12-01T07:00"
+                },
+                {
+                    "MeasurementId": 14,
+                    "View": "baseHour",
+                    "From": "2012-12-20T12:34:56",
+                    "To": "2013-01-01T01:02"
+                }
+            ]
+        }
+
++ Response 200
+
+    [Multiple Measurement Utilization Data Collection][]
+
++ Response 401
