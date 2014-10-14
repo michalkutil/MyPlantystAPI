@@ -139,7 +139,7 @@ Returns day cumulative utilization for specified day interval given by the `from
 
 # Group Multiple Measurement Data
 
-## Multiple Measurement Utilization Data Collection [/MeasurementData]
+## Multiple Measurements Utilization Data Collection [/MeasurementData]
 
 + Model (application/json)
     + Body
@@ -202,7 +202,25 @@ Returns day cumulative utilization for specified day interval given by the `from
 
 ### Multiple Measurements Cumulative Utilization Data [POST]
 
-Returns day cumulative utilization for specified day interval given by the `from` (include) to the `to` (include) params.
+Returns cumulative utilization data for each of the queries provided in the `queries` field of the
+JSON *model*.
+
+The payload contains `Queries` array. Its members contain:
+* `MeasurementId` `int` required. Identifies the ID of the measurement.
+* `View` `string` required. Identifies the measurement view to be used. 
+The view available for the given measurement is provided in the results 
+of Measurement API endpoint.
+* `From` `DateTime` required. Specifies the lower bound of the data query.
+* `To` `DateTime` required. Specifies the upper bound of the data query.
+
+In the result, each of the members of the `results` array contains:
+* `query` A copy of a query from the *model*, identifying which query the result belongs to.
+* `data` The result of the query having the following fields:
+    * `itemCount` `int`. Always present, specifies the count of items in the aggregation.
+    * `timeSquareSum` `long`. Omittable.
+    * `timeSum` `long`. Omittable.
+    * `timeValueSum` `double`. Omittable.
+    * `valueSum` `double`. Omittable.
 
 + Request
 
@@ -225,6 +243,6 @@ Returns day cumulative utilization for specified day interval given by the `from
 
 + Response 200
 
-    [Multiple Measurement Utilization Data Collection][]
+    [Multiple Measurements Utilization Data Collection][]
 
 + Response 401
