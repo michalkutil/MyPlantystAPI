@@ -103,6 +103,14 @@ To update a User Message send a JSON *model* with updated value for one or more 
                 }
             ]
 
+### List User Measurements [GET]
+
+Returns day cumulative utilization for specified day interval given by the `from` (include) to the `to` (include) params.
+
++ Response 200
+
+    [User Measurements Collection][]
+
 # Group Variable Time Data
 
 ## Utilization Cumulative Collection [/UtilizationCumulative/{?variableId,from,to}]
