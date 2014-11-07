@@ -186,7 +186,7 @@ Returns day cumulative utilization for specified day interval given by the `from
                             "TimeValueSum",
                             "ValueSum"
                         ],
-                        "data":[]
+                        "data":[1, 1.44, 1.2, 2.5, 3]
                     },
                     {
                         "query": {
@@ -217,12 +217,17 @@ of Measurement API endpoint.
 
 In the result, each of the members of the `results` array contains:
 * `query` A copy of a query from the *model*, identifying which query the result belongs to.
-* `data` The result of the query having the following fields:
-    * `itemCount` `int`. Always present, specifies the count of items in the aggregation.
+* `outputFormat` Array of fields present in the `data` array. The array defines the meaning of the *data* values
+in their respective order, as they are n-uples put into a single, one-dimensional array.
+The n-uple is described by n elements of the `outputFormat` array.
+The array may contain the following values:
+    * `itemCount` `int`. Omittable.
     * `timeSquareSum` `long`. Omittable.
     * `timeSum` `long`. Omittable.
     * `timeValueSum` `double`. Omittable.
-    * `valueSum` `double`. Omittable.
+    * `valueSum` `double`. Always present, specifies the count of items in the aggregation..
+
+* `data` The result of the query in format described by the `outputFormat` array.
 
 + Request
 
