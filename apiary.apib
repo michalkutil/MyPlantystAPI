@@ -171,56 +171,32 @@ Returns day cumulative utilization for specified day interval given by the `from
     + Body
 
             {
-                "results": [
+                "results":[
                     {
                         "query": {
                             "measurementId": 2,
                             "from": "2011-11-30T23:00:00",
                             "to": "2011-12-01T07:00:00",
-                            "view": "baseHour"
+                            "view": "Base.HourSet"
                         },
-                        "data": [
-                            {
-                                "itemCount": 1,
-                                "timeSquareSum": 100,
-                                "timeSum": 10,
-                                "timeValueSum": 50,
-                                "valueSum": 5
-                            },
-                            {
-                                "itemCount": 0
-                            }
-                        ]
+                        "outputFormat": [
+                            "ItemCount",
+                            "TimeSquareSum",
+                            "TimeSum",
+                            "TimeValueSum",
+                            "ValueSum"
+                        ],
+                        "data":[]
                     },
                     {
                         "query": {
                             "measurementId": 14,
-                            "view": "baseHour",
+                            "view": "Base.MinuteSet",
                             "from": "2012-12-20T12:34:56",
                             "to": "2013-01-01T01:02"
                         },
-                        "data": [
-                            {
-                                "itemCount": 0
-                            },
-                            {
-                                "itemCount": 1,
-                                "timeSquareSum": 100,
-                                "timeSum": 10,
-                                "timeValueSum": 50.0,
-                                "valueSum": 5.0
-                            },
-                            {
-                                "itemCount": 3,
-                                "timeSquareSum": 100,
-                                "timeSum": 10,
-                                "timeValueSum": 66.0,
-                                "valueSum": 6.6
-                            },
-                            {
-                                "itemCount": 0
-                            }
-                        ]
+                        "outputFormat": ["ValueSum"],
+                        "data":[2,3,3,3,3,3,3,3,2,3,3,3,3,3,3,2]
                     }
                 ]
             }
