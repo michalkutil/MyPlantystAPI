@@ -111,6 +111,59 @@ Returns day cumulative utilization for specified day interval given by the `from
 
     [User Measurements Collection][]
 
+# Group Measurement Annotations
+
+## Measurement Annotations Collection [/Measurement/{id}/Annotations]
+
++ Model (application/json)
+    + Body
+
+            {
+                _links: {
+                    self: {
+                        href: "/Api/Measurement/1/Annotations"
+                    }
+                }
+                _embedded: {
+                    annotation:[
+                        {
+                            text: "Some text",
+                            userId: 3,
+                            time: "2014-12-12T12:12:00.000",
+                            modificationTime: "2014-11-10T17:23:06.1402688",
+                            order: 0,
+                            measurementId: 1,
+                            _links: {
+                                self: {
+                                href: "/Api/Measurement/1/Annotation/20141212121212/0"
+                                }
+                            }
+                        },
+                        {
+                            text: "Some text",
+                            userId: 3,
+                            time: "2014-12-12T12:12:00",
+                            modificationTime: "2014-10-31T09:58:14.3669745",
+                            order: 1,
+                            measurementId: 1,
+                            _links: {
+                                self: {
+                                    href: "/Api/Measurement/1/Annotation/20141212121212/1"
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+
+### List Measurement Annotations [GET]
+
+Returns day cumulative utilization for specified day interval given by the `from` (include) to the `to` (include) params.
+
++ Response 200
+
+    [User Measurements Collection][]
+
 # Group Variable Time Data
 
 ## Utilization Cumulative Collection [/UtilizationCumulative/{?variableId,from,to}]
