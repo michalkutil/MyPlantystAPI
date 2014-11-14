@@ -47,7 +47,7 @@ A single User Message with all its details.
 
 + Parameters
     + userId (required, integer, `1`) ... The `userId` of the user.
-    + id (required, string, `2520111168377037307`) ... String uniqueue user message `id` to perform action with.
+    + id (required, string, `2520111168377037307`) ... String unique user message `id` to perform action with.
 
 + Model
     + Body
@@ -113,7 +113,12 @@ Returns day cumulative utilization for specified day interval given by the `from
 
 # Group Measurement Annotations
 
-## Measurement Annotations Collection [/Measurement/{id}/Annotations]
+## Measurement Annotations Collection [/Measurement/{id}/Annotations?from={from}&to={to}]
+
++ Parameters
+    + id (required, int, `14`) ... Measurement annotation `id` the listed annotations belong to.
+    + from (required, datetime, `2014-01-05T12:43`) ... Lower bound of the temporal interval the annotations are listed in. _Comment: the timestamps of annotations are rounded to minutes._
+    + to (required, datetime, `2014-02-15T15:40`) ... Upper bound of the temporal interval the annotations are listed in. _Comment: the timestamps of annotations are rounded to minutes._
 
 + Model (application/json)
     + Body
@@ -158,11 +163,41 @@ Returns day cumulative utilization for specified day interval given by the `from
 
 ### List Measurement Annotations [GET]
 
-Returns day cumulative utilization for specified day interval given by the `from` (include) to the `to` (include) params.
+Returns list of annotations for the measurement specified by `id`, having timestamp between `from` and `to`.
 
 + Response 200
 
-    [User Measurements Collection][]
+    [Measurement Annotations Collection][]
+
+## New Measurement Annotation [/Measurement/{id}/Annotations]
+
++ Parameters
+    + id (required, int, `14`) ... Measurement annotation `id` the new annotation belongs to.
+
++ Model (application/json)
+    + Body
+
+            {
+                text: "Some text"
+                userId: 3
+                time: "2014-12-12T12:12:12"
+                modificationTime: "2014-11-10T17:23:06.1402688"
+                order: 0
+                measurementId: 1
+                _links: {
+                    self: {
+                        href: "/Api/Measurement/1/Annotation/20141212121200/0"
+                    }
+                }
+            }
+            
+### Add Measurement Annotation [POST]
+
+Returns list of annotations for the measurement specified by `id`, having timestamp between `from` and `to`.
+
++ Response 200
+
+    [Measurement Annotations Collection][]
 
 # Group Variable Time Data
 
