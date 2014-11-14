@@ -169,6 +169,8 @@ Returns list of annotations for the measurement specified by `id`, having timest
 
     [Measurement Annotations Collection][]
 
++ Response 403
+
 ## New Measurement Annotation [/Measurement/{id}/Annotations]
 
 + Parameters
@@ -180,7 +182,7 @@ Returns list of annotations for the measurement specified by `id`, having timest
             {
                 text: "Some text"
                 userId: 3
-                time: "2014-12-12T12:12:12"
+                time: "2014-12-12T12:12"
                 modificationTime: "2014-11-10T17:23:06.1402688"
                 order: 0
                 measurementId: 1
@@ -193,11 +195,83 @@ Returns list of annotations for the measurement specified by `id`, having timest
             
 ### Add Measurement Annotation [POST]
 
-Returns list of annotations for the measurement specified by `id`, having timestamp between `from` and `to`.
+Returns the recently added annotation.
 
++ Request (application/json)
+
+        {
+            "text": "Some text",
+            "time": "2014-11-10T10:50"
+        }
+        
 + Response 200
 
-    [Measurement Annotations Collection][]
+    [New Measurement Annotation][]
+
++ Response 403
+
+## Measurement Annotation [/Measurement/{id}/Annotations/{time}/{order}]
+
++ Parameters
+    + id (required, int, `14`) ... Measurement annotation `id` the new annotation belongs to.
+    + time (required, datetime, `20141110124300`) ... The timestamp of the annotation in the format YYYYMMDDHHMMSS.
+    + order (required, int, `4`) ... The order of the annotation in the list of annotations for the given measurement and timestamp.
+    Typically with the value 0. (The indexation starts at zero.)
+
++ Model (application/json)
+    + Body
+
+            {
+                text: "Some text"
+                userId: 3
+                time: "2014-12-12T12:12"
+                modificationTime: "2014-11-10T17:23:06.1402688"
+                order: 0
+                measurementId: 1
+                _links: {
+                    self: {
+                        href: "/Api/Measurement/1/Annotation/20141212121200/0"
+                    }
+                }
+            }
+            
+### Get Measurement Annotation [GET]
+
+Returns the annotation.
+        
++ Response 200
+
+    [Measurement Annotation][]
+
++ Response 403
+
++ Response 404
+
+### Change Annotation Text [PATCH]
+
+Updates the text of the annotation.
+
++ Request (application/json)
+
+        {
+            "text": "Some new text"
+        }
+
++ Response 204
+
++ Response 403
+
++ Response 404
+
+### Delete Annotation [DELETE]
+
+Deletes the annotation.
+
++ Response 204
+
++ Response 403
+
++ Response 404
 
 # Group Variable Time Data
 
