@@ -73,6 +73,8 @@ Gets ĺist of measurements assigned to the currently signed up user.
 + Parameters
     + id (required, int, `14`) ... Measurement annotation `id` the new annotation belongs to.
     + time (required, datetime, `20141110124300`) ... The timestamp of the annotation in the format YYYYMMDDHHMMSS.
+        *Notice: the timestamp identifier of the annotation is in the UTC format and will be parsed so.*    
+    
     + order (required, int, `4`) ... The order of the annotation in the list of annotations for the given measurement and timestamp.
     Typically with the value 0. (The indexation starts at zero.)
 
@@ -82,8 +84,8 @@ Gets ĺist of measurements assigned to the currently signed up user.
             {
                 text: "Some text"
                 userId: 3
-                time: "2014-11-10T12:43:00"
-                modificationTime: "2014-11-10T17:23:06.1402688"
+                time: "2014-11-10T12:43:00Z"
+                modificationTime: "2014-11-10T17:23:06.1402688Z"
                 order: 0
                 measurementId: 1
                 _links: {
@@ -150,8 +152,8 @@ Deletes the annotation.
                         {
                             text: "Some text",
                             userId: 3,
-                            time: "2014-12-12T12:12:00.000",
-                            modificationTime: "2014-11-10T17:23:06.1402688",
+                            time: "2014-12-12T12:12:00.000Z",
+                            modificationTime: "2014-11-10T17:23:06.1402688Z",
                             order: 0,
                             measurementId: 1,
                             _links: {
@@ -163,8 +165,8 @@ Deletes the annotation.
                         {
                             text: "Some text",
                             userId: 3,
-                            time: "2014-12-12T12:12:00",
-                            modificationTime: "2014-10-31T09:58:14.3669745",
+                            time: "2014-12-12T12:12:00Z",
+                            modificationTime: "2014-10-31T09:58:14.3669745Z",
                             order: 1,
                             measurementId: 1,
                             _links: {
@@ -179,11 +181,16 @@ Deletes the annotation.
 
 ### List Measurement Annotations [GET]
 
-Returns list of annotations for the measurement specified by `id`, having timestamp between `from` and `to`.
+Returns list of annotations for the measurement specified by `id`,
+having timestamp between `from` and `to`. The timestamps should be
+in the UTC format in order to match the row keys of the annotations
+to be returned. The timestamp must contain the information about
+either time zone offset or being in UTC format, or else its interpretation
+is not defined.
 
 + Parameters
-    + from (required, datetime, `2014-01-05T12:43`) ... Lower bound of the temporal interval the annotations are listed in. _Comment: the timestamps of annotations are rounded to minutes._
-    + to (required, datetime, `2014-02-15T15:40`) ... Upper bound of the temporal interval the annotations are listed in. _Comment: the timestamps of annotations are rounded to minutes._
+    + from (required, datetime, `2014-01-05T12:43Z`) ... Lower bound of the temporal interval the annotations are listed in. _Comment: the timestamps of annotations are rounded to minutes._
+    + to (required, datetime, `2014-02-15T15:40Z`) ... Upper bound of the temporal interval the annotations are listed in. _Comment: the timestamps of annotations are rounded to minutes._
 
 + Response 200
 
@@ -195,13 +202,17 @@ Returns list of annotations for the measurement specified by `id`, having timest
 
 To create a new measurement annotation simply provide a JSON hash of the *text* and *time* attributes for the new measurement annotation.
 
+The *time* attribute must contain the information about
+either time zone offset or being in UTC format, or else its interpretation
+is not defined.
+
 Returns the recently added annotation.
 
 + Request (application/json)
 
         {
             "text": "Some text",
-            "time": "2014-11-10T10:50"
+            "time": "2014-11-10T10:50Z"
         }
         
 + Response 200
@@ -223,8 +234,8 @@ Returns the recently added annotation.
                     {
                         "query": {
                             "measurementId": 2,
-                            "from": "2011-11-30T23:00:00",
-                            "to": "2011-12-01T07:00:00",
+                            "from": "2011-11-30T23:00:00Z",
+                            "to": "2011-12-01T07:00:00Z",
                             "view": "Base.HourSet"
                         },
                         "outputFormat": [
@@ -240,8 +251,8 @@ Returns the recently added annotation.
                         "query": {
                             "measurementId": 14,
                             "view": "Base.MinuteSet",
-                            "from": "2012-12-20T12:34:56",
-                            "to": "2013-01-01T01:02"
+                            "from": "2012-12-20T12:34:56Z",
+                            "to": "2013-01-01T01:02Z"
                         },
                         "outputFormat": ["ValueSum"],
                         "data":[2,3,3,3,3,3,3,3,2,3,3,3,3,3,3,2]
