@@ -7,19 +7,56 @@ HOST: http://my.plantyst.com/Api
 
 ## Measurements Collection [/Measuremenents]
 
-+ Model (application/json)
++ Model (application/hal+json)
     + Body
 
-            [
-                {
-                    "Id":1,
-                    "Title":"A Measurement"
+            {
+                "_links":{
+                    "self":{
+                        "href":"/Api/Measurements"
+                    }
                 },
-                {
-                    "Id":85,
-                    "Title":"Another Measurement"
+                "_embedded":{
+                    "timezone":[
+                        {
+                            "id":"Central Europe Standard Time",
+                            "name":"(UTC+01:00) Praha, Bratislava, Budapešť, Bělehrad, Lublaň",
+                            "iana":"Europe/Prague",
+                            "_links":{
+                                "self":{
+                                    "href":"/Api/TimeZone/Central%20Europe%20Standard%20Time"
+                                }
+                            }
+                        }
+                    ],
+                    "measurement":[
+                        {
+                            "measurementId":1,
+                            "archived":false,
+                            "_links":{
+                                "self":{
+                                    "href":"/Api/Measurement/1"
+                                },
+                                "timezone":{
+                                    "href":"/Api/TimeZone/Central%20Europe%20Standard%20Time"
+                                }
+                            }
+                        },
+                        {
+                            "measurementId":2,
+                            "archived":false,
+                            "_links":{
+                                "self":{
+                                    "href":"/Api/Measurement/2"
+                                },
+                                "timezone":{
+                                    "href":"/Api/TimeZone/Central%20Europe%20Standard%20Time"
+                                }
+                            }
+                        }
+                    ]
                 }
-            ]
+            }
 
 ### List Measurements [GET]
 
@@ -39,7 +76,7 @@ Returns day cumulative utilization for specified day interval given by the `from
     + order (required, int, `4`) ... The order of the annotation in the list of annotations for the given measurement and timestamp.
     Typically with the value 0. (The indexation starts at zero.)
 
-+ Model (application/json)
++ Model (application/hal+json)
     + Body
 
             {
@@ -99,7 +136,7 @@ Deletes the annotation.
 + Parameters
     + id (required, int, `14`) ... Measurement annotation `id` the listed annotations belong to.
 
-+ Model (application/json)
++ Model (application/hal+json)
     + Body
 
             {
