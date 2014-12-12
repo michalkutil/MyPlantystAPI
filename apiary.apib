@@ -133,7 +133,7 @@ Returns the annotation.
 
 ### Change Annotation [PATCH]
 
-Updates the text of the annotation.
+Updates the text of the annotation. The maximal text length is 140 characters.
 
 + Request (application/json)
 
@@ -225,6 +225,8 @@ is not defined.
 ### Create a Measurement Annotation [POST]
 
 To create a new measurement annotation simply provide a JSON hash of the *text* and *time* attributes for the new measurement annotation.
+
+The maximal text length is 140 characters.
 
 The *time* attribute must contain the information about
 either time zone offset or being in UTC format, or else its interpretation
