@@ -64,13 +64,13 @@ HOST: http://my.plantyst.com/Api
 
 Gets ĺist of measurements assigned to the currently signed up user along with
 array of rights the user has to each of the measurements. The rights may be one
-of the following (*so far* being in inclusion, i. e. each subsequent right contains
+of the following (so far being in inclusion, i. e. each subsequent right contains
 the previous).
 
-* View - Right to view measurement data.
-* Editor - Right to edit the measurement and its annotations.
-* Admin - ?
-* Owner - ?
+* View - view measurement data.
+* Contributor - contribute additional information (ie. annotations) for measurement.
+* Admin - edit everithing in the measurement, include access rigths for other.
+* Owner - same as Admin, but the access rigths can't be revoked.
 
 + Response 200
 
